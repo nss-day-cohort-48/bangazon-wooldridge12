@@ -30,5 +30,13 @@
             "customer_id": 5,
             "seller_id": 7
         }
+    },
+    {
+        "pk": 5,
+        "model": "bangazonapi.favorite",
+        "fields": {
+            "customer_id": 6,
+            "seller_id": 5
+        }
     }
 ]

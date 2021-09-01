@@ -9,7 +9,7 @@
                 FROM 
                     bangazonapi_favorite f
                 JOIN
-                    bangazonapi_customer c ON f.customer_id 
+                    bangazonapi_customer c ON f.customer_id = c.id
                 JOIN
                     auth_user u ON c.user_id = u.id
                     
