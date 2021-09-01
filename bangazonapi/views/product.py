@@ -13,14 +13,6 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.parsers import MultiPartParser, FormParser
 
 
-class ProductSerializer(serializers.ModelSerializer):
-    """JSON serializer for products"""
-    class Meta:
-        model = Product
-        fields = ('id', 'name', 'price', 'number_sold', 'description',
-                  'quantity', 'created_date', 'location', 'image_path',
-                  'average_rating', 'can_be_rated', )
-        depth = 1
 
 
 class Products(ViewSet):
@@ -153,8 +145,11 @@ class Products(ViewSet):
         try:
             product = Product.objects.get(pk=pk)
             serializer = ProductSerializer(product, context={'request': request})
+
             return Response(serializer.data)
+
         except Exception as ex:
+            
             return HttpResponseServerError(ex)
 
     def update(self, request, pk=None):
@@ -293,3 +288,12 @@ class Products(ViewSet):
             return Response(None, status=status.HTTP_204_NO_CONTENT)
 
         return Response(None, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+class ProductSerializer(serializers.ModelSerializer):
+    """JSON serializer for products"""
+    class Meta:
+        model = Product
+        fields = ('id', 'name', 'price', 'number_sold', 'description',
+                  'quantity', 'created_date', 'location', 'image_path',
+                  'average_rating', 'can_be_rated', )
+        depth = 1
