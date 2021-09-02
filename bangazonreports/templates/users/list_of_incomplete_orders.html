@@ -1,26 +1,3 @@
-{% comment %} {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Bangazon Reports</title>
-  </head>
-  <body>
-    <h1>Incomplete Orders</h1>
-
-    {% for order in incomplete_orders %}
-        <h2>{{ order.orderId }}</h2>
-        <ol>
-            <li>
-                Customer: {{ order.customer_name }}
-                Price: {{ order.total_price }}
-            </li>
-            {% endfor %}
-        </ol>
-    {% endfor %}
-  </body>
-</html> {% endcomment %}
-
 {% load static %}
 <!DOCTYPE html>
 <html>
