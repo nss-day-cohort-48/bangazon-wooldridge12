@@ -12,10 +12,10 @@ def incompleteorder_list(request):
 
             db_cursor.execute("""
             SELECT
-                o.id AS orderId,
+                o.id AS order_id,
                 u.id user_id,
                 c.id,
-                SUM(p.price),
+                SUM(p.price) AS total_price,
                 o.payment_type_id AS payments,
                 u.first_name || ' ' || u.last_name AS full_name
             FROM
@@ -31,12 +31,25 @@ def incompleteorder_list(request):
             WHERE
                 payments IS NULL
             GROUP BY
-                orderId;
+                order_id;
             """)
             dataset = db_cursor.fetchall()
 
             incomplete_orders = {}
 
             for row in dataset:
-                order = order()
-                order.
+                uid = row["order_id"]
+
+                incomplete_orders[uid] = {}
+                incomplete_orders[uid]["order_id"] = uid
+                incomplete_orders[uid]["full_name"] = row["full_name"]
+                incomplete_orders[uid]["total_price"] = row["total_price"]
+
+            list_of_incomplete_orders = incomplete_orders.values()
+
+            template = 'users/list_of_incomplete_orders.html'
+            context = {
+                'incompleteorder_list':
+                list_of_incomplete_orders
+            }
+            return render(request, template, context)
