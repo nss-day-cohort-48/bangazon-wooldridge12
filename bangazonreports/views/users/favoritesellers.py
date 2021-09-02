@@ -1,11 +1,11 @@
-"""Module for generating games by user report"""
+"""Module for generating report"""
 import sqlite3
 from django.shortcuts import render
 from bangazonapi.models import Favorite
 from bangazonreports.views import Connection
 
 def favoriteseller_list(request):
-    """Function to build an HTML report of games by user"""
+    """Function to build an HTML report"""
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = sqlite3.Row
@@ -23,7 +23,7 @@ def favoriteseller_list(request):
                 JOIN
                     bangazonapi_customer c ON f.customer_id = c.id
                 JOIN
-                    auth_user u ON c.user_id = u.id
+                    auth_user u ON c.user_id = u.id;
             """)
             dataset = db_cursor.fetchall()
 
