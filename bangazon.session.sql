@@ -79,3 +79,13 @@
                 payments IS NULL
             GROUP BY
                 order_id;
+
+
+            SELECT
+                p.id AS product_id,
+                p.price AS price,
+                p.name AS name
+            FROM
+                bangazonapi_product p
+            WHERE
+                price < 1000
